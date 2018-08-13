@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<title>Candidatos</title>
+	<!-- Include our stylesheet -->
+	<link href="assets/css/styles.css" rel="stylesheet" />
+	<link href="bootstrap-4.1.3-dist/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+	<a class="navbar-brand" href="/">logout</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				  <span class="navbar-toggler-icon"></span>
+	</button>
+			  
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item">
+				<a class="nav-link" href="/form.html">Ver listado de Candidatos</a>
+			</li>
+			
+		</ul>
+	</div>
+</nav>
+<div>
+	<div class="container">
+		<button type="button" onclick="create()" class="btn btn-default">Crear un candidato</button>
+	</div>
+	<div class="container">
+		<label for="dni">Buscar por dni:</label>
+		<input type="input" id="dni_serch" name="dni_serch" type="number" rows="1"></input>
+		<button type="button" onclick="getCandidatoByDni()" class="btn btn-default">Buscar</button>
+	</div>
+	<div class="container">
+		<label for="dni">Buscar por nombre:</label>
+		<input type="input" id="nombreYapellido_serch" name="nombreYapellido_serch" rows="1"></input>
+		<button type="button" onclick="getCandidatoByNombreYapellido()" class="btn btn-default">Buscar</button>
+	</div>
+	<div class="container">
+		<div id="table" border="1">
+		
+		</div>
+	</div>
+	<div id="formUpdate" style="display:none;">
+		<div class="form-field">
+			<div class="row"> 	
+				<div class="col col-md-4">
+					<div class="form-group">
+						<input type="hidden" class="form-control" id="id_update">
+					</div>
+				</div>
+			</div>
+		<div class="form-field">
+			<label for="nombreYapellido">Nombre y Apellido</label>
+			<input type="input" id="nombreYapellido" name="nombreYapellido" rows="1"></input>
+		</div>
+		<div class="form-field">
+			<label for="dni">DNI</label>
+			<input type="input" id="dni" name="dni" type="number" rows="1"></input>
+		</div>
+		<div class="form-field">
+			<label for="fechaNac">Fecha de Nacimiento</label>
+			<input type="input" id="fechaNac" name="fechaNac" rows="1" ></input>
+		</div>
+		<div class="form-field">
+			<label for="domicilio">Domicilio</label>
+			<input type="input" id="domicilio" name="domicilio" rows="1"></input>	 
+		</div>
+		<div class="form-field">
+			<label for="telefono">Telefono</label>
+			<input type="input" id="telefono" name="telefono" rows="1" ></input>
+		</div>
+		<div class="form-field">
+			<label for="experiencia">Experiencia</label>
+			<input type="input" id="experiencia" name="experiencia" rows="4"></input>
+		</div>
+		<div class="form-field">
+			<label for="email">Email</label>
+			<input type="input" id="email" name="email" type="email" />
+		</div>
+		<div class="form-field">
+			<label for="foto">foto</label>
+			<input type="file" id="foto" name="foto" type="file" />
+			<img id="fotoPreview" />
+		</div>
+		<div class="row">
+			<div class="col col-md-4">	
+				</div class="form-group">	
+					<button type="button" onclick="putCandidato()" class="btn btn-default">Actualizar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="formCreate" style="display:none;">
+		<div class="container">
+			<h1>Candidatos</h1>
+			<div class="form-field">
+				<label for="nombreYapellido">Nombre y Apellido</label>
+				<input type="input" id="fc_nombreYapellido" name="fc_nombreYapellido" rows="1"></input>
+			</div>
+			<div class="form-field">
+				<label for="dni">DNI</label>
+				<input type="input" id="fc_dni" name="fc_dni" type="number" rows="1"></input>
+			</div>
+			<div class="form-field">
+				<label for="fechaNac">Fecha de Nacimiento</label>
+				<input type="input" id="fc_fechaNac" name="fc_fechaNac" rows="1" ></input>
+			</div>
+			<div class="form-field">
+				<label for="domicilio">Domicilio</label>
+				<input type="input" id="fc_domicilio" name="fc_domicilio" rows="1"></input>
+			</div>
+			<div class="form-field">
+				<label for="telefono">Telefono</label>
+				<input type="input" id="fc_telefono" name="fc_telefono" rows="1" ></input>
+			</div>
+			<div class="form-field">
+				<label for="experiencia">Experiencia</label>
+				<input type="input" id="fc_experiencia" name="fc_experiencia" rows="4"></input>
+			</div>
+			<div class="form-field">
+				<label for="email">Email</label>
+				<input type="input" id="fc_email" name="fc_email" type="email" />
+			</div>
+			<div class="form-field">
+				<label for="foto">foto</label>
+				<input type="file" id="fc_foto" name="fc_foto" type="file" />
+			</div>
+			<div class="row">
+				<div class="col col-md-4">	
+					</div class="form-group">	
+						<button type="button" onclick="saveCandidato()" class="btn btn-default">Crear Candidato</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	
+	
+	
+	<!-- Include our script files -->
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="assets/js/script.js"></script>
+	<script>
+	 $(document).ready(function(){
+		loginValid() 
+			
+	 });
+	</script>
+	
+</body>
+
+</html>
